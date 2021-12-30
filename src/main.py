@@ -10,6 +10,28 @@ starting_grid = [
     [0,4,9,2,0,6,0,0,7]
 ]
 
+def validate_grid(grid, number, position):
+    # Check row
+    for x in range(len(grid[0])):
+        if grid[position[0]][x] == number and position[1] != x:
+            return False
+
+    # Check column
+    for y in range(len(grid)):
+        if grid[x][position[1]] == number and position[0] != y:
+            return False
+
+    # Check box
+    box_x = position[1] // 3
+    box_y = position[0] // 3
+
+    for x in range(box_y * 3, box_y * 3 + 3):
+        for y in range(box_x * 3, box_x * 3 + 3):
+            if grid[x][y] == number and (x, y) != position:
+                return False
+
+    return True
+
 def display_grid(grid):
     for x in range(len(grid)):
         if x % 3 == 0 and x != 0:
