@@ -26,3 +26,10 @@ def display_grid(grid):
 
 
 
+def locate_blank(grid):
+    for x in range(len(grid)):
+        for y in range(len(grid[0])):
+            if grid[x][y] == 0:
+                return (x, y)  # row, col
+
+    return None
