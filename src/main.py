@@ -1,4 +1,4 @@
-starting_grid = [
+grid = [
     [7,8,0,4,0,0,1,2,0],
     [6,0,0,0,7,5,0,0,9],
     [0,0,0,6,0,1,0,7,8],
@@ -9,6 +9,25 @@ starting_grid = [
     [1,2,0,0,0,7,4,0,0],
     [0,4,9,2,0,6,0,0,7]
 ]
+
+def solve_grid(grid):
+    locate = locate_blank(grid)
+    if not locate:
+        return True
+    else:
+        row, column = locate
+    for x in range(1, 10):
+        if validate_grid(grid, x, (row, column)):
+            grid[row][column] = x
+
+            if solve_grid(grid):
+                return True
+
+            grid[row][column] = 0
+
+    return False
+
+
 
 def validate_grid(grid, number, position):
     # Check row
@@ -55,3 +74,10 @@ def locate_blank(grid):
                 return (x, y)  # row, col
 
     return None
+
+display_grid(grid)
+solve_grid(grid)
+print("")
+print("")
+print("")
+display_grid(grid)
